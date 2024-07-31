@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Receitas</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body onload="preencheCatalogo()" class="bg-warning">
+    <div class="container-fluid">
+        <h1 class="text-center my-4">Catálogo de Receitas</h1>
+        <div id="pnlCatalogo" class="d-flex flex-wrap justify-content-center"></div>
+    </div>
+
+    <script>
+        const receitas = [
+            {
+                "titulo": "Bolo de Cenoura",
+                "imagem": "img/01.png",
+                "preparo": "Misture os ingredientes, asse por 40 minutos.",
+                "ingredientes": ["Cenoura", "Farinha", "Ovos", "Açúcar"]
+            },
+            {
+                "titulo": "Lasanha",
+                "imagem": "img/02.png",
+                "preparo": "Monte as camadas e leve ao forno por 30 minutos.",
+                "ingredientes": ["Massa de lasanha", "Molho de tomate", "Queijo", "Carne moída"]
+            },
+            {
+                "titulo": "Pizza de Calabresa",
+                "imagem": "img/03.png",
+                "preparo": "Asse a massa por 10 minutos, adicione o molho e coberturas, e asse por mais 15 minutos.",
+                "ingredientes": ["Massa de pizza", "Molho de tomate", "Queijo mussarela", "Calabresa", "Cebola", "Orégano"]
+            }
+        ];
+
+        function getListaIngredientes(receita) {
+            return `<ul>${receita.ingredientes.map(ingrediente => `<li>${ingrediente}</li>`).join('')}</ul>`;
+        }
+
+        function getCard(receita) {
+            return `
+                <div class="card" style="width: 250px; margin: 10px;">
+                    <img src="${receita.imagem}" class="card-img-top" alt="${receita.titulo}">
+                    <div class="card-body">
+                        <h5 class="card-title">${receita.titulo}</h5>
+                        <div class="card-text">
+                            ${getListaIngredientes(receita)}
+                            <hr>
+                            ${receita.preparo}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function preencheCatalogo() {
+            const pnlCatalogo = document.getElementById('pnlCatalogo');
+            pnlCatalogo.innerHTML = receitas.map(receita => getCard(receita)).join('');
+        }
+    </script>
+</body>
+</html>
